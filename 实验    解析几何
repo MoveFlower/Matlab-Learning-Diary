@@ -1,0 +1,63 @@
+
+##实验一    向量代数
+
+实验目的
+1. 掌握MuPAD创建和绘制向量的功能，用MuPAD处理向量的线性运算；
+2. 用MuPAD计算向量的模和方向余弦；
+3. 用MuPAD计算两向量的夹角、数量积和向量积.
+
+
+(a) 矩阵
+matrix(m, n, [[], ..., []]) 
+
+(b) 列向量
+matrix(m, 1, [])
+
+(c) 行向量
+matrix(1, n, [])
+
+向量的图形对象，语法格式如下：
+plot::Arrow2d([x1, y1], [x2, y2], a=a1..a2, Attributes)
+plot::Arrow3d([x1, y1, z1], [x2, y2, z2], a=a1..a2, Attributes)
+说明：
+[x1, y1]，[x1, y1, z1]：可选项，始点的坐标，如果缺省始点，系统自动以原点为始点；
+[x2, y2]，[x2, y2, z2]：终点的坐标；
+a=a1..a2：可选项，动画参数及取值范围（既可以a1>a2，也可以a1<a2）；
+
+命令norm计算向量的模长，语法格式如下：
+norm(v, 2)
+说明：
+v：向量（行或列），矩阵类型.
+
+ 命令linalg::normalize计算方向余弦向量，语法格式如下：
+linalg::normalize(v)
+
+linalg::scalarProduct(a, b, Real)
+说明：
+a, b：元素个数相等的向量（行或列皆可），矩阵类型；
+Real：可选项，注意首字母R需要大写，默认格式linalg::scalarProduct(a, b)按照复向量的数量积的数学定义返回
+
+ 命令linalg::angle计算两向量的夹角，语法格式如下：
+linalg::angle(a, b)
+说明：
+a, b：元素个数相等的向量（行或列皆可），矩阵类型. 
+
+  命令linalg::crossProduct计算两向量的向量积，语法格式为：
+linalg::crossProduct(a, b)
+说明：
+a, b： 3 维向量，矩阵类型（行或列皆可，linalg::crossProduct返回的向量的规模和第 1 输入项 a 相同）
+
+命令det计算方阵的行列式，语法格式如下：
+det(A)
+det(A, Normal=FALSE)
+说明：
+A：方阵，矩阵类型；
+Normal：可选项，默认值为Normal=TRUE，即计算行列式时系统自动使用命令normal进行通分运算再返回计算结果，
+
+
+det(matrix([[`i&rarr;`, `j&rarr;`, `k&rarr;`], [1, 1, 0], [1, 0, 1]]));
+算得=(1,-1,-1)，即.
+说明：当根据行列式公式计算向量积时，建议使用标识符`i&rarr;`, `j&rarr;`, `k&rarr;`来表示，即 x , y , z 三个
+坐标轴的正向单位向量，可直接使用标识符 i , j , k ，但由于它们是常用的，最好先用命令delete将它们初始化.
+
+
