@@ -1,4 +1,4 @@
-# Mtlab-Learning-Diary
+# Matlab-Learning-Diary
 记录学习过程。
 
 
