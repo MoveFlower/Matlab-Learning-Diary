@@ -1,0 +1,63 @@
+##实验    微分方程
+
+实验目的
+1. 掌握MuPAD计算常微分方程的符号解的功能；
+2. 掌握MuPAD计算常微分方程的幂级数解的功能；
+3. 探究振动问题的微分方程在各种情况下的解的性质.
+
+
+1. 常微分方程的数据类型
+        命令ode用来生成数据类型属于常微分方程（MuPAD的常微分方程数据类型也记作ode）的对象，
+其语法格式为：
+###ode(ODEequation, UnknownFunction)
+具体而言，有四种情形：
+###ode(eq, y(x))
+###ode({eq, inits1, ..., initsm}, y(x))
+###ode({eq1, …, eqn}, {y1(x), …, yn(x)})
+###ode({eq1, …, eqn, inits1, ..., initsm}, {y1(x), …, yn(x)})
+        说明：
+        ODEequation：常微分方程（组）以及初、边值条件的表达式，如上所述有四种情形：
+(1) 仅有一个常微分方程eq；(2) 有一个常微分方程eq以及一个或多个初、边值条件inits1, ..., initsm ；
+(3) 有多个常微分方程eq1, …, eqn ；(4) 有多个常微分方程eq1, …, eqn 及初、边值条件inits1, ..., initsm .
+除情形(1)以外，另外三种情形都有不止一个表达式，表达式之间要用逗号分隔，要用大括号{}括住，
+构成一个集合，方程及初、边值的表达式的顺序是任意的；方程的表达式如果没有等号，系统默认表达式
+等于零；初、边值的表达式必须要有等号.
+        UnknownFunction：常微分方程（组）的未知的一元函数及其自变量，如上所述有两种情形：
+(1) 单个常微分方程仅有一个未知函数；(2) 常微分方程组有多个未知函数. 其中，未知的一元函数必须写成
+类似于y(x)的形式，指明自变量和因变量，不可以仅写因变量；一元函数的低阶导数用求导运算符'（单引号）
+表示比较简便，如一阶导数y'(x)，二阶导数y''(x)，三阶导数y'''(x)；高阶导数使用求导命令diff比较简便，
+如diff(y(x), x$n)是y(x)的n阶导数；多个未知函数y1(x), …, yn(x)要用逗号分隔，要用大括号{}括住，构成一个集合.
+
+
+2. 常微分方程的符号解
+        命令ode::solve可以计算常微分方程（组）的符号解，其语法格式为：
+###ode::solve(ode(ODEequation, UnknownFunction))
+        可以简写作：
+###solve(ode(ODEequation, UnknownFunction))
+###ode::solve(ODEequation, UnknownFunction)
+
+命令ode::solve的语法格式还有ode::solve(ode(ODEequation, UnknownFunction), options)以及相应的简写方式
+solve(ode(ODEequation, UnknownFunction), options)和ode::solve(ODEequation, UnknownFunction, options)，其中options
+是用于设置常微分方程求解器的功能的可选项，可设置以下四种功能：
+        (1) MaxDegree=n（n 指代正整数 2, 3, 4，系统默认值为 2）
+        不使用次数超过 n 的无理根式来表示方程的符号解，参见命令solve的语法说明；
+        (2) IgnoreSpecialCases
+        分情况讨论时省略参数在“很小”的集合里取值的特殊情况，减少分情况讨论的分支数目，
+参见命令solve的语法说明，建议在命令ode::solve返回比较复杂的分情况讨论时使用；
+        (3) IgnoreAnalyticConstraints
+        系统针对超越函数（指数、对数、三角和反三角、双曲和反双曲）使用纯粹的代数化简，
+参见命令solve的语法说明，建议在命令ode::solve返回含有虚数根 i 的求解结果时使用；
+        (4) Type=OdeType（OdeType指代Abel, Bernoulli, Chini, Clairaut, ExactFirstOrder, ExactSecondOrder, Homogeneous, 
+Lagrange, Riccati）
+
+
+3. 常微分方程的幂级数解
+        命令ode::series计算一个常微分方程（及其初、边值）的幂级数解，语法格式：
+ode::series(ODEequation, UnknownFunction, x=x0)
+ode::series(ODEequation, UnknownFunction, x=x0, order)
+        说明：
+        ODEequation, UnknownFunction是命令ode的两个输入项（仅限于一个常微分方程及其初、边值）；
+        x=x0：自变量和幂级数的展开点；
+        order：可选项，幂级数展开式的项数（从次数最低的非零项，到比大O项低一次的项，
+包括非零项以及等于零的项，不包括大O项），系统默认值是6. 
+
