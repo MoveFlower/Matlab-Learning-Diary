@@ -20,3 +20,53 @@ obj1, obj2, ...：一个或多个空间图形对象，从obj2开始是可选项�
 a=a1..a2：可选项，动画参数及取值范围，既可以a1<a2，也可以a1>a2；
 Attributes：可选项，修改某些图形属性的默认设置，其中选项Center=[x0, y0, z0]是旋转轴经过的已知点的坐标，
 选项Axis=[vx, vy, vz]是旋转轴的方向向量的坐标，默认值分别为[0, 0, 0]和[0, 0, 1].
+
+
+2. 绕坐标轴旋转所得的图像
+(1)  绕 x 轴旋转
+        命令plot::XRotate生成坐标面 Oxy 上的曲线绕 x 轴旋转一定角度所成的旋转曲面的图形对象，
+语法格式如下：
+plot::XRotate(f, x=xmin..xmax, a=a1..a2, Attributes)
+说明：
+f：函数 f (x) 的表达式；
+x=xmin..xmax：函数 f (x) 的自变量及取值范围，必须满足xmin<xmax；
+a=a1..a2：可选项，动画参数及取值范围，既可以a1<a2，也可以a1>a2；
+Attributes：可选项，修改某些图形属性的默认设置，其中AngleRange=anglemin..anglemax用于设置旋转角度的范围
+（必须anglemin<anglemax），若缺省，系统默认设置是AngleRange=0..2*PI，即旋转一周.
+
+(2) 绕 z 轴旋转
+        命令plot::ZRotate生成坐标面 Oxz 上的曲线绕 z 轴旋转一定角度所成的旋转曲面的图形对象，
+语法格式如下（参数说明同命令plot::XRotate）：
+plot::ZRotate(f, x=xmin..xmax, a=a1..a2, Attributes)
+
+注：为了用户可观察到旋转变换保持距离和角度不变，命令plot::Rotate3d、plot::XRotate和plot::ZRotate都设置了
+Scaling=Constrained（即#C），图像上空间直角坐标系的三条坐标轴取相同的单位长度，因此在plot命令中不需要
+就此项进行重复设置.
+
+
+3. 显函数的曲面图像
+        命令plot::Function3d生成由二元函数确定的曲面的图形对象，语法格式如下：
+plot::Function3d(f, x=xmin..xmax, y=ymin..ymax, Attributes)
+说明：
+f：二元函数 f (x, y) 的表达式；
+x=xmin..xmax, y=ymin..ymax：二元函数 f (x, y) 的自变量及取值范围，必须xmin<xmax，ymin<ymax；
+Attributes：可选项，修改某些图形属性的默认设置. 
+
+
+4. 隐函数方程的曲面图像
+        命令plot::Implicit3d生成由曲面一般方程确定的曲面的图形对象，
+语法格式如下：
+plot::Implicit3d(f, x=xmin..xmax, y=ymin..ymax, z=zmin..zmax, Attributes)
+说明：
+f：三元函数 f (x, y, z) 的表达式；
+x=xmin..xmax, y=ymin..ymax, z=zmin..zmax：三元函数 f (x, y, z) 的变量及取值范围，必须xmin<xmax，ymin<ymax，zmin<zmax；
+Attributes：可选项，修改某些图形属性的默认设置. 
+
+
+5. 参数方程的曲面图像
+        命令plot::Surface生成由参数方程确定的曲面的图形对象，语法格式如下：
+plot::Surface([f, g, h], u=umin..umax, v=vmin..vmax, Attributes)
+说明：
+[f, g, h]：曲面上动点 (x, y, z) 的三个直角坐标分量的参数表达式；
+u=umin..umax, v=vmin..vmax：参数变量及取值范围，必须umin<umax，vmin<vmax；
+Attributes：可选项，修改某些图形属性的默认设置. 
